@@ -1,8 +1,13 @@
 <Solution>
-  <Folder Name="/SolutionItems/">
+  <Folder Name="/Solution Items/">
     <File Path=".editorconfig" />
     <File Path=".gitattributes" />
+    <File Path="compose.yaml" />
     <File Path="Directory.Build.props" />
     <File Path="Directory.Packages.props" />
+  </Folder>
+  <Folder Name="/src/" />
+  <Folder Name="/src/API/">
+    <Project Path="src/API/Evanage.Api/Evanage.Api.csproj" />
   </Folder>
 </Solution>

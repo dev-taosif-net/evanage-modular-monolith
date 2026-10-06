@@ -1,0 +1,7 @@
+﻿services:
+  evanage.api:
+    image: evanage.api
+    build:
+      context: .
+      dockerfile: src/API/Evanage.Api/Dockerfile
+

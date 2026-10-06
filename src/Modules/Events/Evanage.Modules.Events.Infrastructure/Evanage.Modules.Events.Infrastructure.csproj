@@ -4,5 +4,9 @@
       <ProjectReference Include="..\Evanage.Modules.Events.Application\Evanage.Modules.Events.Application.csproj" />
       <ProjectReference Include="..\Evanage.Modules.Events.Presentation\Evanage.Modules.Events.Presentation.csproj" />
     </ItemGroup>
+  
+    <ItemGroup>
+      <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" />
+    </ItemGroup>
 
 </Project>

@@ -2,8 +2,9 @@
   <PropertyGroup>
     <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
   </PropertyGroup>
-
   <ItemGroup>
+    <PackageVersion Include="MediatR" Version="14.2.0" />
+    <PackageVersion Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="10.0.3" />
     <PackageVersion Include="SonarAnalyzer.CSharp" Version="10.35.0.4138" />
   </ItemGroup>
 </Project>

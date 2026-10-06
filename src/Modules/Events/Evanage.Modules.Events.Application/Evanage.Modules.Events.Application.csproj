@@ -3,5 +3,9 @@
     <ItemGroup>
       <ProjectReference Include="..\Evanage.Modules.Events.Domain\Evanage.Modules.Events.Domain.csproj" />
     </ItemGroup>
+  
+    <ItemGroup>
+      <PackageReference Include="MediatR" />
+    </ItemGroup>
 
 </Project>

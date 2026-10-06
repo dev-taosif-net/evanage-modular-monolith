@@ -10,4 +10,11 @@
   <Folder Name="/src/API/">
     <Project Path="src/API/Evanage.Api/Evanage.Api.csproj" />
   </Folder>
+  <Folder Name="/src/Modules/" />
+  <Folder Name="/src/Modules/Events/">
+    <Project Path="src/Modules/Events/Evanage.Modules.Events.Application/Evanage.Modules.Events.Application.csproj" />
+    <Project Path="src/Modules/Events/Evanage.Modules.Events.Domain/Evanage.Modules.Events.Domain.csproj" />
+    <Project Path="src/Modules/Events/Evanage.Modules.Events.Infrastructure/Evanage.Modules.Events.Infrastructure.csproj" />
+    <Project Path="src/Modules/Events/Evanage.Modules.Events.Presentation/Evanage.Modules.Events.Presentation.csproj" />
+  </Folder>
 </Solution>

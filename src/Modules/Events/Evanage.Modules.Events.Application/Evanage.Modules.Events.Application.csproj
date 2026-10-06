@@ -1,0 +1,7 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  
+    <ItemGroup>
+      <ProjectReference Include="..\Evanage.Modules.Events.Domain\Evanage.Modules.Events.Domain.csproj" />
+    </ItemGroup>
+
+</Project>

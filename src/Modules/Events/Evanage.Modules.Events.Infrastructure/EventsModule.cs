@@ -1,5 +1,10 @@
+using Evanage.Modules.Events.Application.Abstractions.Data;
+using Evanage.Modules.Events.Domain.Events;
+using Evanage.Modules.Events.Infrastructure.Data;
 using Evanage.Modules.Events.Infrastructure.Database;
+using Evanage.Modules.Events.Infrastructure.Events;
 using Evanage.Modules.Events.Presentation.EndPoints;
+using FluentValidation;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Migrations;
@@ -19,6 +24,12 @@ public static class EventsModule
 
     public static IServiceCollection AddEventsModule(this IServiceCollection services, IConfiguration configuration)
     {
+        services.AddMediatR(config =>
+        {
+            config.RegisterServicesFromAssembly(Application.AssemblyReference.Assembly);
+        });
+
+        services.AddValidatorsFromAssembly(Application.AssemblyReference.Assembly, includeInternalTypes: true);
 
         services.AddInfrastructure(configuration);
 
@@ -30,6 +41,10 @@ public static class EventsModule
 
         NpgsqlDataSource npgsqlDataSource = new NpgsqlDataSourceBuilder(databaseConnectionString).Build();
         services.TryAddSingleton(npgsqlDataSource);
+
+        services.AddScoped<IDbConnectionFactory, DbConnectionFactory>();
+
+
         services.AddDbContext<EventsDbContext>(options =>
             options
                 .UseNpgsql(
@@ -38,5 +53,7 @@ public static class EventsModule
                         .MigrationsHistoryTable(HistoryRepository.DefaultTableName, Schemas.Events))
                 .UseSnakeCaseNamingConvention()
             );
+        services.AddScoped<IEventRepository, EventRepository>();
+        services.AddScoped<IUnitOfWork>(sp => sp.GetRequiredService<EventsDbContext>());
     }
 }

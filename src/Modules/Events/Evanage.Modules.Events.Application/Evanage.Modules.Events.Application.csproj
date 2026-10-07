@@ -5,6 +5,8 @@
     </ItemGroup>
   
     <ItemGroup>
+      <PackageReference Include="Dapper" />
+      <PackageReference Include="FluentValidation.DependencyInjectionExtensions" />
       <PackageReference Include="MediatR" />
     </ItemGroup>
 

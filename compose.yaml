@@ -4,4 +4,30 @@
     build:
       context: .
       dockerfile: src/API/Evanage.Api/Dockerfile
+    container_name: Evanage.Api
+    ports:
+      - 5000:8080
+      - 5001:8081
+    environment:
+      - ConnectionStrings__Database=Host=evanage.database;Port=5432;Database=evanage;Username=postgres;Password=postgres;Include Error Detail=true
+    depends_on:
+      evanage.database:
+        condition: service_healthy
+
+  evanage.database:
+    image: postgres:17
+    container_name: Evanage.Database
+    environment:
+      - POSTGRES_DB=evanage
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    volumes:
+      - ./.containers/db:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d evanage"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
 

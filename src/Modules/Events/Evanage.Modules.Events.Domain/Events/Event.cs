@@ -1,18 +1,48 @@
+using Evanage.Modules.Events.Domain.Abstractions;
+
 namespace Evanage.Modules.Events.Domain.Events;
 
-public sealed class Event
+public sealed class Event : Entity
 {
-    public Guid Id { get; set; }
+    private Event()
+    {
+    }
 
-    public required string Title { get; set; }
 
-    public required string Description { get; set; }
+    public Guid Id { get; private set; }
 
-    public required string Location { get; set; }
+    public string Title { get; private set; } = string.Empty;
 
-    public DateTime StartsAtUtc { get; set; }
+    public string Description { get; private set; } = string.Empty;
 
-    public DateTime? EndsAtUtc { get; set; }
+    public string Location { get; private set; } = string.Empty;
 
-    public EventStatus Status { get; set; }
+    public DateTime StartsAtUtc { get; private set; }
+
+    public DateTime? EndsAtUtc { get; private set; }
+
+    public EventStatus Status { get; private set; }
+    public static Event Create(
+        string title,
+        string description,
+        string location,
+        DateTime startsAtUtc,
+        DateTime? endsAtUtc)
+    {
+        var @event = new Event
+        {
+            Id = Guid.NewGuid(),
+            Title = title,
+            Description = description,
+            Location = location,
+            StartsAtUtc = startsAtUtc,
+            EndsAtUtc = endsAtUtc,
+            Status = EventStatus.Draft
+        };
+
+        @event.Raise(new EventCreatedDomainEvent(@event.Id));
+
+        return @event;
+    }
+
 }

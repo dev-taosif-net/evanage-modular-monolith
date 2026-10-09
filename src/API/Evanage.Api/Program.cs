@@ -1,3 +1,4 @@
+using Evanage.Api.Extensions;
 using Evanage.Modules.Events.Infrastructure;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
@@ -12,6 +13,8 @@ if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
     app.UseSwaggerUI(options => options.SwaggerEndpoint("/openapi/v1.json", "Evanage API v1"));
+
+    app.ApplyMigrations();
 }
 
 

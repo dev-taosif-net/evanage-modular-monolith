@@ -5,17 +5,33 @@ services:
       context: "/home/taosif/Lab/NetLab/Projects/evanage-modular-monolith"
       dockerfile: "src/API/Evanage.Api/Dockerfile"
       target: "base"
+      args:
+        BUILD_CONFIGURATION: "Debug"
     command: []
     entrypoint:
-    - "dotnet"
-    - "/app/bin/Debug/net10.0/Evanage.Api.dll"
+    - "/opt/JetBrains/RiderDebuggerTools/linux-x64/JetBrains.Debugger.Worker"
+    - "--runtimeconfig"
+    - "/opt/JetBrains/RiderDebuggerTools/JetBrains.Debugger.Worker.runtimeconfig.json"
+    - "--mode=server"
+    - "--frontend-port=57000"
+    - "--backend-port=57200"
+    - "--roslyn-worker-port=57400"
+    - "--timeout=60"
     environment:
       ASPNETCORE_ENVIRONMENT: "Development"
       DOTNET_USE_POLLING_FILE_WATCHER: "true"
+      RIDER_DEBUGGER_LOG_DIR: "/var/opt/JetBrains/RiderDebuggerTools"
+      RESHARPER_LOG_CONF: "/etc/opt/JetBrains/RiderDebuggerTools/backend-log.xml"
     image: "evanage.api:dev"
-    ports: []
+    ports:
+    - "127.0.0.1:57000:57000"
+    - "127.0.0.1:57200:57200"
+    - "127.0.0.1:57400:57400"
     volumes:
     - "/home/taosif/Lab/NetLab/Projects/evanage-modular-monolith/src/API/Evanage.Api:/app:rw"
     - "/home/taosif/Lab/NetLab/Projects/evanage-modular-monolith:/src:rw"
     - "/home/taosif/.nuget/packages:/home/app/.nuget/packages"
+    - "/home/taosif/.local/share/JetBrains/RiderRemoteDebugger/2026.2.3.1/Linux64:/opt/JetBrains/RiderDebuggerTools"
+    - "/snap/rider/801/bin/backend-log.xml:/etc/opt/JetBrains/RiderDebuggerTools/backend-log.xml"
+    - "/home/taosif/.cache/JetBrains/Rider2026.2/log/DebuggerWorker/JetBrains.Debugger.Worker.2026_10_09_10_06_29:/var/opt/JetBrains/RiderDebuggerTools:rw"
     working_dir: "/app"

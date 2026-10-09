@@ -15,6 +15,8 @@ if (app.Environment.IsDevelopment())
 }
 
 
-EventsModule.MapEndpoints(app);
+RouteGroupBuilder api = app.MapGroup("api");
+
+EventsModule.MapEndpoints(api);
 
 await app.RunAsync();
